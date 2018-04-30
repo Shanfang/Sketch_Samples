@@ -40,7 +40,7 @@ unsigned int generate_zipf(unsigned int sizedom, double totalmass, double zipf_p
     normcoef += 1 / pow(i + 1, zipf_param);
   }
 
-  // put the frequency table in f
+  // put the frequency table in f by computing the frequency and round it to integer
   for (unsigned int i = 0; i < sizedom; i++) {
     f[i] = (unsigned int)rint(totalmass / (pow(i + 1, zipf_param) * normcoef));
     tuples_no += f[i];
