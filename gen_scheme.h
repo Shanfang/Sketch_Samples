@@ -10,6 +10,10 @@
 
 /*
   Generating schemes for +-1 random variables
+  For details see the papers:
+	1) "Fast Range-Summable Random Variables for Efficient Aggregate Estimation" by F. Rusu and A. Dobra
+	2) "Pseudo-Random Number Generation for Sketch-Based Estimations" by F. Rusu and A. Dobra
+
   Assumption: integers are represented on 32 bits
 */
 
@@ -25,7 +29,7 @@ inline unsigned int seq_xor(unsigned int x)
   x ^= (x >> 4);
   x ^= (x >> 2);
   x ^= (x >> 1);
-
+  
   return (x & 1U);
 }
 
@@ -37,7 +41,7 @@ inline unsigned int seq_xor(unsigned int x)
 inline unsigned int hash31(unsigned long long a, unsigned long long b, unsigned long long x)
 {
   unsigned long long result;
-  unsigned int lresult;
+  unsigned int lresult;  
 
   result = (a * x) + b;
   result = ((result >> (unsigned int)HL) + result) & (unsigned long long)MOD;
@@ -64,7 +68,7 @@ inline int EH3(unsigned int i0, unsigned int I1, unsigned int j)
 {
   unsigned int mask = 0xAAAAAAAA;
   unsigned int p_res = (I1&j) ^ (j & (j<<1) & mask);
-
+  
   int res = ((i0 ^ seq_xor(p_res)) & 1U == 1U) ? 1 : -1;
   return res;
 }
@@ -73,7 +77,7 @@ inline int EH3(unsigned int i0, unsigned int I1, unsigned int j)
 inline int CW2(unsigned long a, unsigned long b, unsigned long x)
 {
   unsigned int p_res = hash31(a,b,x);
-
+  
   int res = (p_res & 1U == 1U) ? 1 : -1;
   return res;
 }
@@ -87,7 +91,7 @@ inline int CW2(unsigned long a, unsigned long b, unsigned long x)
 inline int BCH5(unsigned int i0, unsigned int I1, unsigned int I2, unsigned int j)
 {
   unsigned int p_res = (I1&j) ^ (I2 & (j*j*j));
-
+  
   int res = ((i0 ^ seq_xor(p_res)) & 1U == 1U) ? 1 : -1;
   return res;
 }
@@ -121,6 +125,29 @@ inline int CW4(unsigned long a, unsigned long b, unsigned long c, unsigned long 
   unsigned int p_res = hash31(hash31(hash31(a,b,x),c,x),d,x);
 
   int res = (p_res & 1U == 1U) ? 1 : -1;
+  return res;
+}
+
+
+
+/*
+  b-valued random variables
+  2-wise and 4-wise CW scheme
+*/
+inline unsigned int CW2B(unsigned long a, unsigned long b, unsigned long x, unsigned int M)
+{
+  unsigned int p_res = hash31(a,b,x);
+  
+  unsigned int res = p_res % M;
+  return res;
+}
+
+
+inline unsigned int CW4B(unsigned long a, unsigned long b, unsigned long c, unsigned long d, unsigned long x, unsigned int M)
+{
+  unsigned int p_res = hash31(hash31(hash31(a,b,x),c,x),d,x);
+
+  unsigned int res = p_res % M;
   return res;
 }
 
