@@ -135,8 +135,9 @@ int main(int argc, char** argv) {
 
 	delete s1;
 	delete s2;
+	printf("%15.2f \t %15.2f\n", sk_est, sk_samp_est);
 
-	printf("Sketch estimate is: %15.2f \t Sketch over Bernoulli sampling is: %15.2f\n", sk_est, sk_samp_est);
+	// printf("Sketch estimate is: %15.2f \t Sketch over Bernoulli sampling is: %15.2f\n", sk_est, sk_samp_est);
   }
 
   delete r1;

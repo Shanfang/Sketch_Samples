@@ -34,7 +34,8 @@ decor_param = 0 corresponds to complete randomness;
 decor_param = 1 corresponds to complete positive correlation or identical relations.
 */
 
-//zipf's distribution
+//zipf's distribution, the first parameter determies the shape of distribution
+// the second parameter 
 void Zipf::Generate_Data(double data_param, double decor_param) {
     vector<unsigned int> freq(dom_size, 0);
     tuples_no = generate_zipf(dom_size, tuples_no, data_param, freq);
