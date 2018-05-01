@@ -22,6 +22,6 @@ For other systems, please checkout the documentation on [GSL](https://www.gnu.or
 <br/>SAMP_PROB 
 <br/>num_runs
 
-For details of corresponding parameters, please checkout the documentation at [GitHub Wiki](https://github.com/Shanfang/Sketch_Samples/wiki)
-</br>
+<br/>For details of corresponding parameters, please checkout the documentation at [GitHub Wiki](https://github.com/Shanfang/Sketch_Samples/wiki)<br/>
+
 3. run `make clean` to remove all intermediate files.
